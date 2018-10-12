@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <utility>
+#include <string.h>
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -11,6 +12,7 @@ int main(int argc, char *argv[])
     //int peak[1000][2];
     pair <int ,int > peak[1000];
     int count = 0;
+    int check = 0;
     ifstream infile(argv[1]);
     ofstream outfile;
 
@@ -23,6 +25,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     else{
+        infile.open(argv[1]);
         infile.open("matrix.data");
         outfile.open("final.peak");
     //cout<<"happy"<<endl;
@@ -33,8 +36,24 @@ int main(int argc, char *argv[])
 
         for( int i = 1; i < m-1; i++){
             for( int j = 1; j < n-1; j++){
-                if(matrix[i][j]>=matrix[i-1][j] && matrix[i][j]>=matrix[i+1][j] 
-                   && matrix[i][j]>=matrix[i][j-1] && matrix[i][j]>=matrix[i][j+1]){
+                if( i > 1){
+                    if(matrix[i][j]>=matrix[i-1][j]) check = 1;
+                    else return 1;
+                }
+                if( i < m){
+                    if(matrix[i][j]>=matrix[i+1][j]) check = 1;
+                    else return 1;
+                }
+                if( j > 1){
+                    if(matrix[i][j]>=matrix[i][j-1]) check = 1;
+                    else return 1;
+                }
+                if( j < n){
+                    if(matrix[i][j]>=matrix[i][j+1]) check = 1;
+                    else return 1;
+                }
+
+                if( check == 1 ){
                        peak[count].first = i;
                        peak[count].second = j;
                   // peak[count][0] = i;
