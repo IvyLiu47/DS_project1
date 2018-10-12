@@ -13,8 +13,13 @@ int main(int argc, char *argv[])
     pair <int ,int > peak[1000];
     int count = 0;
     int check = 0;
-    ifstream infile(argv[1]);
+    ifstream infile;
     ofstream outfile;
+    *strrchr(argv[0], '\\') = '\0';
+    string path;
+    string pathin, pathout;
+
+    path = string(argv[0]) + "\\" + "test_case" + "\\" + argv[1] + "\\";
 
     if(argc != 2){
         cout << "Input error." << endl;
@@ -25,10 +30,11 @@ int main(int argc, char *argv[])
         return 1;
     }
     else{
-        infile.open(argv[1]);
-        infile.open("matrix.data");
-        outfile.open("final.peak");
-    //cout<<"happy"<<endl;
+        pathin = path + "matrix.data";
+        infile.open(pathin.c_str());
+        pathout = path + "final.peak";
+        outfile.open(pathout.c_str());
+    
         infile>>m>>n;
         for( int i = 0; i < m; i++)
             for( int j = 0 ; j < n; j++)
@@ -38,19 +44,19 @@ int main(int argc, char *argv[])
             for( int j = 1; j < n-1; j++){
                 if( i > 1){
                     if(matrix[i][j]>=matrix[i-1][j]) check = 1;
-                    else return 1;
+                    else break;
                 }
                 if( i < m){
                     if(matrix[i][j]>=matrix[i+1][j]) check = 1;
-                    else return 1;
+                    else break;
                 }
                 if( j > 1){
                     if(matrix[i][j]>=matrix[i][j-1]) check = 1;
-                    else return 1;
+                    else break;
                 }
                 if( j < n){
                     if(matrix[i][j]>=matrix[i][j+1]) check = 1;
-                    else return 1;
+                    else break;
                 }
 
                 if( check == 1 ){
@@ -62,6 +68,10 @@ int main(int argc, char *argv[])
                     }   
             }
         }
+        cout<<count<<endl;
+        for( int i = 0; i < count; i++)
+            cout<<peak[i].first<<" "<<peak[i].second<<endl;
+
         outfile<<count<<endl;
         for( int i = 0; i < count; i++)
             outfile<<peak[i].first<<" "<<peak[i].second<<endl;
@@ -70,7 +80,4 @@ int main(int argc, char *argv[])
         outfile.close();
         return 0;
     }
-
-
-
 }
