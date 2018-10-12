@@ -1,0 +1,41 @@
+# #include <iostream>
+#include <fstream>
+#define blue "\x1b[;34;1m"
+#define RESET "\x1b[0;m"
+using namespace std;
+int main(int argc, char *argv[])
+{
+    int a,b;
+    int mp[1000][1000];
+    ifstream infile;
+    ofstream outfile;
+    infile.open("matrix.data");
+    //outfile.open("out.txt");
+    infile>>a>>b;
+    cout<<a<<b<<endl;
+    for(int i=0;i<a;i++) 
+        for(int j=0;j<b;j++)
+            infile>>mp[i][j];
+    for(int i=0;i<a;i++) 
+        for(int j=0;j<b;j++)
+        {
+            if(mp[i][j] >= mp[i-1][j] && mp[i][j] >= mp[i+1][j] && mp[i][j] >= mp[i][j-1] &&mp[i][j] >= mp[i][j+1] && i < a-1 && j< b-1 && i && j)
+            {
+                //outfile<<"peak:"<<mp[i][j]<<" "<<"at:"<<i+1<<" "<<j+1<<endl;
+            }
+        }
+    for(int i=0;i<a;i++) 
+    {
+        for(int j=0;j<b;j++)
+        {
+            
+            if(mp[i][j] >= mp[i-1][j] && mp[i][j] >= mp[i+1][j] && mp[i][j] >= mp[i][j-1] &&mp[i][j] >= mp[i][j+1] && i < a-1 && j< b-1 && i && j)
+            {
+                printf(blue"%-3d" RESET,mp[i][j]); 
+            }
+            else printf("%-3d",mp[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
