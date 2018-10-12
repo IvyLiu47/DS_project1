@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     string path;
     string pathin, pathout;
 
-    path = string(argv[0]) + "\\" + "test_case" + "\\" + argv[1] + "\\";
+    path = string(argv[0]) + "\\" + argv[1] + "\\";
 
     if(argc != 2){
         cout << "Input error." << endl;
