@@ -8,9 +8,9 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     int m, n;
-    int (*matrix)[1000] = new int [1000][1000];
-    //int peak[1000][2];
-    pair <int ,int > peak[1000];
+    int (*matr)[1000] = new int [1000][1000];
+    int (*peak)[2] = new int [1000000][2];
+    //pair <int , int > peak[100000];
     int count = 0;
     int check = 0;
     ifstream infile;
@@ -38,41 +38,46 @@ int main(int argc, char *argv[])
         infile>>m>>n;
         for( int i = 1; i <= m; i++)
             for( int j = 1 ; j <= n; j++)
-                infile>>matrix[i][j];
+                infile>>matr[i][j];
 
         for( int i = 1; i <= m; i++){
             for( int j = 1; j <= n; j++){
+                //cout<<"i = "<<i<<"   j = "<<j<<endl;
                 if( i > 1){
-                    if(matrix[i][j]>=matrix[i-1][j]) check = 1;
+                    if(matr[i][j]>=matr[i-1][j]) check = 1;
                     else continue;
                 }
                 if( i < m){
-                    if(matrix[i][j]>=matrix[i+1][j]) check = 1;
+                    if(matr[i][j]>=matr[i+1][j]) check = 1;
                     else continue;
                 }
                 if( j > 1){
-                    if(matrix[i][j]>=matrix[i][j-1]) check = 1;
+                    if(matr[i][j]>=matr[i][j-1]) check = 1;
                     else continue;
                 }
                 if( j < n){
-                    if(matrix[i][j]>=matrix[i][j+1]) check = 1;
+                    if(matr[i][j]>=matr[i][j+1]) check = 1;
                     else continue;
                 }
      
                 if( check == 1 ){
-                    peak[count].first = i;
-                    peak[count].second = j;
-              // peak[count][0] = i;
-               //peak[count][1] = j;
+                   // peak[count].first = i;
+                    //peak[count].second = j;
+                    peak[count][0] = i;
+                    peak[count][1] = j;
                     count++;
                 }      
             }
         }
 
+        /*cout<<count<<endl;
+        for( int i = 0; i < count; i++)
+            outfile<<peak[i][0]<<" "<<peak[i][1]<<endl;*/
+
         outfile<<count<<endl;
         for( int i = 0; i < count; i++)
-            outfile<<peak[i].first<<" "<<peak[i].second<<endl;
-            //cout<<peak[i][0]<<" "<<peak[i][1]<<endl;
+            //outfile<<peak[i].first<<" "<<peak[i].second<<endl;
+            outfile<<peak[i][0]<<" "<<peak[i][1]<<endl;
         infile.close();
         outfile.close();
         return 0;
