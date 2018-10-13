@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     int m, n;
     int (*matr)[1000] = new int [1000][1000];
     int (*peak)[2] = new int [1000000][2];
-    //pair <int , int > peak[100000];
+    //pair <int , int > peak[1000000];
     int count = 0;
     int check = 0;
     ifstream infile;
@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
         outfile.open(pathout.c_str());
     
         infile>>m>>n;
+
         for( int i = 1; i <= m; i++)
             for( int j = 1 ; j <= n; j++)
                 infile>>matr[i][j];
@@ -69,7 +70,6 @@ int main(int argc, char *argv[])
                 }      
             }
         }
-
         /*cout<<count<<endl;
         for( int i = 0; i < count; i++)
             outfile<<peak[i][0]<<" "<<peak[i][1]<<endl;*/
@@ -78,6 +78,9 @@ int main(int argc, char *argv[])
         for( int i = 0; i < count; i++)
             //outfile<<peak[i].first<<" "<<peak[i].second<<endl;
             outfile<<peak[i][0]<<" "<<peak[i][1]<<endl;
+        
+        delete []matr;
+        delete []peak;
         infile.close();
         outfile.close();
         return 0;
