@@ -8,8 +8,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     int m, n;
-    int (*matr)[1000] = new int [1000][1000];
-    int (*peak)[2] = new int [1000000][2];
+    int (*matr)[1001] = new int [1001][1001];
+    int (*peak)[2] = new int [1000001][2];
     //pair <int , int > peak[1000000];
     int count = 0;
     int check = 0;
@@ -75,14 +75,15 @@ int main(int argc, char *argv[])
             outfile<<peak[i][0]<<" "<<peak[i][1]<<endl;*/
 
         outfile<<count<<endl;
-        for( int i = 0; i < count; i++)
+        for( int k = 0; k < count; k++)
             //outfile<<peak[i].first<<" "<<peak[i].second<<endl;
-            outfile<<peak[i][0]<<" "<<peak[i][1]<<endl;
+            outfile<<peak[k][0]<<" "<<peak[k][1]<<endl;
         
-        delete []matr;
-        delete []peak;
-        infile.close();
-        outfile.close();
-        return 0;
+
     }
+    delete []matr;
+    delete []peak;
+    infile.close();
+    outfile.close();
+    return 0;    
 }
